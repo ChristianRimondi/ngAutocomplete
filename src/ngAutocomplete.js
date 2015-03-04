@@ -76,29 +76,25 @@ angular.module("ngMapAutocomplete", [])
 
                         watchEnter = scope.options.watchEnter === true;
 
+                        opts.types = []
                         if (scope.options.types) {
-                            opts.types = [];
                             opts.types.push(scope.options.types);
-                            scope.gPlace.setTypes(opts.types);
-                        } else {
-                            scope.gPlace.setTypes([]);
                         }
+                        scope.gPlace.setTypes(opts.types)
 
+                        opts.bounds = null
                         if (scope.options.bounds) {
                             opts.bounds = scope.options.bounds;
-                            scope.gPlace.setBounds(opts.bounds);
-                        } else {
-                            scope.gPlace.setBounds(null);
                         }
+                        scope.gPlace.setBounds(opts.bounds)
 
+                        opts.componentRestrictions = null
                         if (scope.options.country) {
                             opts.componentRestrictions = {
                                 country: scope.options.country
                             };
-                            scope.gPlace.setComponentRestrictions(opts.componentRestrictions);
-                        } else {
-                            scope.gPlace.setComponentRestrictions(null);
                         }
+                        scope.gPlace.setComponentRestrictions(opts.componentRestrictions)
                     }
                 };
 
@@ -128,12 +124,15 @@ angular.module("ngMapAutocomplete", [])
 
                 //function to get retrieve the autocompletes first result using the AutocompleteService
                 var getPlace = function (result) {
-                    var autocompleteService = new google.maps.places.AutocompleteService();
+                    scope.autocompleteService = new google.maps.places.AutocompleteService();
                     if (result.name.length > 0) {
-                        autocompleteService.getPlacePredictions(
+                        scope.autocompleteService.getPlacePredictions(
                             {
                                 input: result.name,
-                                offset: result.name.length
+                                offset: result.name.length,
+                                types: opts.types,
+                                bounds: opts.bounds,
+                                componentRestrictions: opts.componentRestrictions
                             },
                             function listentoresult(list, status) {
                                 if (list === null || list.length === 0) {
@@ -198,3 +197,4 @@ angular.module("ngMapAutocomplete", [])
             }
         };
     }]);
+
