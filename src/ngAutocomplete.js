@@ -175,7 +175,11 @@ angular.module("ngMapAutocomplete", [])
 
                 if(scope.options.watchBlur) {
                     element.bind('blur', function () {
-                        getPlace({ name: ngModel.$viewValue });
+                        name = ngModel.$viewValue
+                        if(typeof(name) == 'undefined') {
+                            name = '';
+                        }
+                        getPlace({ name: name });
                     });
                 }
 
