@@ -173,15 +173,15 @@ angular.module("ngMapAutocomplete", [])
                     }
                 };
 
-                if(scope.options.watchBlur) {
-                    element.bind('blur', function () {
-                        name = ngModel.$viewValue
-                        if(typeof(name) == 'undefined') {
-                            name = '';
-                        }
-                        getPlace({ name: name });
-                    });
-                }
+                //if(scope.options.watchBlur) {
+                //    element.bind('blur', function () {
+                //        name = ngModel.$viewValue
+                //        if(typeof(name) == 'undefined') {
+                //            name = '';
+                //        }
+                //        getPlace({ name: name });
+                //    });
+                //}
 
                 ngModel.$render = function () {
                     var location = ngModel.$viewValue;
