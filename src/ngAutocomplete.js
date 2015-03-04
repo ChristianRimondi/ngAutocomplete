@@ -41,6 +41,7 @@
  *       + bounds: bounds,     Google maps LatLngBounds Object, biases results to bounds, but may return results outside these bounds
  *       + country: country    String, ISO 3166-1 Alpha-2 compatible country code. examples; 'ca', 'us', 'gb'
  *       + watchEnter:         Boolean, true; on Enter select top autocomplete result. false(default); enter ends autocomplete
+ *       + watchBlur:          Boolean, true; on Blur select top autocomplete result. false(default)
  *
  * example:
  *
@@ -171,6 +172,12 @@ angular.module("ngMapAutocomplete", [])
                             });
                     }
                 };
+
+                if(scope.options.watchBlur) {
+                    element.bind('blur', function () {
+                        getPlace({ name: ngModel.$viewValue });
+                    });
+                }
 
                 ngModel.$render = function () {
                     var location = ngModel.$viewValue;
