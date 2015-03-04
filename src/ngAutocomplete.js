@@ -52,8 +52,8 @@
 <<<<<<< HEAD
 **/
 
-angular.module("ngMapAutocomplete", [])
-    .directive('ngMapAutocomplete', [ '$timeout', function ($timeout) {
+angular.module("ngAutocomplete", [])
+    .directive('ngAutocomplete', [ '$timeout', function ($timeout) {
         return {
             require: 'ngModel',
             scope: {
