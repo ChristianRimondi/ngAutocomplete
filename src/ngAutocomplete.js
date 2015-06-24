@@ -205,6 +205,24 @@ angular.module("ngAutocomplete", [])
                     }, 2, false);
                     //    element.unbind('focusout');
                 });
+ 
+                // Remove .pac-container when directive is destroyed
+                scope.$on("$destroy", function() {
+                    var obj = scope.gPlace.gm_accessors_.place;
+                    $.each(Object.keys(obj), function(i, key) {
+                        if(typeof(obj[key]) == "object" && obj[key].hasOwnProperty("gm_accessors_")) {
+                          obj = obj[key].gm_accessors_.input[key];
+                          return false;
+                        }
+                    });
+                    $.each(Object.keys(obj), function(i, key) {
+                        if($(obj[key]).hasClass("pac-container")) {
+                          obj = obj[key];
+                          return false;
+                        }
+                    });
+                    $(obj).remove();
+                })
             }
         };
     }]);
