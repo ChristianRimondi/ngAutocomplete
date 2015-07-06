@@ -216,7 +216,7 @@ angular.module("ngAutocomplete", [])
                         }
                     });
                     $.each(Object.keys(obj), function(i, key) {
-                        if($(obj[key]).hasClass("pac-container")) {
+                        if(typeof(obj[key]) != "string" && $(obj[key]).hasClass("pac-container")) {
                           obj = obj[key];
                           return false;
                         }
